@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import { Icon, type IconName } from './components/Icon'
 import { Home } from './pages/Home'
 import { Library } from './pages/Library'
+import { Mistakes } from './pages/Mistakes'
 import { PoseDetail } from './pages/PoseDetail'
 import { Flow, Quiz, Training, Variations, Warmup } from './pages/Training'
 import { href, useRoute } from './router'
@@ -12,7 +13,8 @@ const Coach = lazy(() => import('./pages/Coach').then((m) => ({ default: m.Coach
 const NAV: { id: string; label: string; icon: IconName }[] = [
   { id: '', label: 'Accueil', icon: 'home' },
   { id: 'poses', label: 'Poses', icon: 'poses' },
-  { id: 'entrainement', label: 'Entraînement', icon: 'train' },
+  { id: 'erreurs', label: 'Erreurs', icon: 'compare' },
+  { id: 'entrainement', label: 'S’entraîner', icon: 'train' },
   { id: 'coach', label: 'Coach', icon: 'camera' },
 ]
 
@@ -28,6 +30,9 @@ export function App() {
   switch (section) {
     case 'poses':
       page = param ? <PoseDetail id={param} /> : <Library />
+      break
+    case 'erreurs':
+      page = <Mistakes />
       break
     case 'entrainement':
       page =

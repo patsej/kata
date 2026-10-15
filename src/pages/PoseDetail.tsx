@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { CompareCard } from '../components/CompareCard'
 import { Icon } from '../components/Icon'
 import { categoryLabel, Level } from '../components/PoseCard'
 import { POSES, POSE_BY_ID } from '../data/poses'
@@ -9,7 +9,6 @@ import { actions, useProgress } from '../store'
 export function PoseDetail({ id }: { id: string }) {
   const pose = POSE_BY_ID.get(id)
   const progress = useProgress()
-  const [view, setView] = useState<'good' | 'bad'>('good')
 
   if (!pose) {
     return (
@@ -27,7 +26,6 @@ export function PoseDetail({ id }: { id: string }) {
   const learned = progress.learned.includes(pose.id)
   const fav = progress.favorites.includes(pose.id)
   const best = progress.bestScores[pose.id]
-  const showBad = view === 'bad' && pose.mistake
 
   return (
     <div className="page detail" key={pose.id}>
@@ -36,25 +34,12 @@ export function PoseDetail({ id }: { id: string }) {
       </a>
       <div className="detail__layout">
         <div className="detail__art">
-          <div className={`detail__figure ${showBad ? 'is-bad' : ''}`}>
-            <Figure
-              illustration={showBad ? pose.mistake!.illustration : pose.illustration}
-              annotated={!showBad}
-              tone={showBad ? 'mistake' : 'default'}
-              title={showBad ? `À éviter : ${pose.name}` : pose.name}
-            />
-            {showBad && <p className="detail__caption">{pose.mistake!.caption}</p>}
+          <div className="detail__figure">
+            <Figure illustration={pose.illustration} title={pose.name} />
           </div>
-          {pose.mistake && (
-            <div className="segmented" role="tablist" aria-label="Comparer">
-              <button type="button" role="tab" aria-selected={view === 'good'} onClick={() => setView('good')}>
-                À faire
-              </button>
-              <button type="button" role="tab" aria-selected={view === 'bad'} onClick={() => setView('bad')}>
-                À éviter
-              </button>
-            </div>
-          )}
+          <a className="detail__jump" href="#erreur" onClick={(e) => { e.preventDefault(); document.getElementById('erreur')?.scrollIntoView({ behavior: 'smooth' }) }}>
+            <Icon name="compare" size={16} /> Comparer avec l’erreur à éviter
+          </a>
         </div>
 
         <div className="detail__text">
@@ -121,6 +106,10 @@ export function PoseDetail({ id }: { id: string }) {
           </div>
         </div>
       </div>
+
+      <section id="erreur" className="detail__compare">
+        <CompareCard pose={pose} heading="L’erreur à éviter" />
+      </section>
 
       <nav className="pager" aria-label="Autres poses">
         <a href={href('poses', prev.id)}>

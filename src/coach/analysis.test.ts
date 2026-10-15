@@ -162,6 +162,7 @@ describe('pose catalogue', () => {
   it('has unique ids and consistent markers', () => {
     const ids = new Set(POSES.map((p) => p.id))
     expect(ids.size).toBe(POSES.length)
+    expect(new Set(POSES.map((p) => p.mistake.title)).size).toBe(POSES.length)
     for (const p of POSES) {
       for (const m of p.illustration.markers ?? []) expect(m.n).toBeLessThanOrEqual(p.steps.length)
       for (const c of p.coach?.checks ?? []) expect(c.min !== undefined || c.max !== undefined).toBe(true)

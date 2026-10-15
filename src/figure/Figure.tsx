@@ -157,6 +157,7 @@ function hairPath(head: Pt, facing: 'front' | 'left' | 'right') {
 function Prop({ prop }: { prop?: BodySkeleton['prop'] }) {
   if (!prop) return null
   if (prop === 'wall-left') return <rect x="0" y="10" width="38" height="282" rx="3" className="fig-prop" />
+  if (prop === 'wall-back') return <rect x="54" y="18" width="92" height="262" rx="4" className="fig-prop" />
   if (prop === 'wall-right') return <rect x="162" y="10" width="38" height="282" rx="3" className="fig-prop" />
   if (prop === 'stool')
     return (
@@ -226,8 +227,9 @@ function FrontFace({ s, fill }: { s: FaceSkeleton; fill: string }) {
 function Eye({ x, y, kind, gaze }: { x: number; y: number; kind: NonNullable<FaceSkeleton['eyes']>; gaze: number }) {
   if (kind === 'closed') return <path d={`M${x - 10},${y} Q${x},${y + 6} ${x + 10},${y}`} className="fig-line" />
   // upper and lower lid heights
-  const up = kind === 'wide' ? 9 : kind === 'squinch' ? 6.5 : kind === 'smize' ? 6 : 7
-  const low = kind === 'wide' ? 7 : kind === 'squinch' ? 1.2 : kind === 'smize' ? 1.5 : 4.5
+  const up = kind === 'wide' ? 9 : kind === 'squinch' ? 6.5 : kind === 'smize' ? 6 : kind === 'down' ? 3.2 : 7
+  const low = kind === 'wide' ? 7 : kind === 'squinch' ? 1.2 : kind === 'smize' ? 1.5 : kind === 'down' ? 4 : 4.5
+  const irisY = kind === 'down' ? y + 2.5 : y - 1
   const shape = `M${x - 11},${y} Q${x},${y - up * 1.6} ${x + 11},${y} Q${x},${y + low * 1.4} ${x - 11},${y} Z`
   const irisR = kind === 'wide' ? 4.6 : 5
   return (
@@ -237,8 +239,8 @@ function Eye({ x, y, kind, gaze }: { x: number; y: number; kind: NonNullable<Fac
         <path d={shape} />
       </clipPath>
       <g clipPath={`url(#clip-${x}-${y}-${kind})`}>
-        <circle cx={x + gaze} cy={y - 1} r={irisR} className="fig-iris" />
-        <circle cx={x + gaze + 1.5} cy={y - 2.5} r={1.2} className="fig-glint" />
+        <circle cx={x + gaze} cy={irisY} r={irisR} className="fig-iris" />
+        <circle cx={x + gaze + 1.5} cy={irisY - 1.5} r={1.2} className="fig-glint" />
       </g>
       <path d={`M${x - 11},${y} Q${x},${y - up * 1.6} ${x + 11},${y}`} className="fig-line" />
       {(kind === 'squinch' || kind === 'smize') && <path d={`M${x - 9},${y + 3.5} Q${x},${y + 6.5} ${x + 9},${y + 3.5}`} className="fig-line fig-line--soft" />}
@@ -247,7 +249,7 @@ function Eye({ x, y, kind, gaze }: { x: number; y: number; kind: NonNullable<Fac
 }
 
 function Brow({ x, y, kind, flip }: { x: number; y: number; kind: NonNullable<FaceSkeleton['eyes']>; flip: boolean }) {
-  const lift = kind === 'wide' ? -5 : kind === 'smize' ? 1 : 0
+  const lift = kind === 'wide' ? -5 : kind === 'smize' || kind === 'down' ? 2 : 0
   const d = flip ? -1 : 1
   const inner = kind === 'wide' ? -3 : 0
   return <path d={`M${x + 12 * d},${y + lift + inner} Q${x},${y - 6 + lift} ${x - 12 * d},${y + 2 + lift}`} className="fig-line fig-line--brow" />

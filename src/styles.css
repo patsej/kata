@@ -235,7 +235,7 @@ main {
   inset: auto 0 0 0;
   z-index: 30;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   height: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
   padding-bottom: env(safe-area-inset-bottom);
   background: color-mix(in srgb, var(--surface) 92%, transparent);
@@ -301,6 +301,10 @@ main {
 
 .section {
   margin-top: 56px;
+}
+
+.section__more {
+  margin-top: 16px;
 }
 
 .section__head p {
@@ -950,45 +954,6 @@ main {
   height: min(62vh, 420px);
 }
 
-.detail__figure.is-bad {
-  background: var(--surface-2);
-}
-
-.detail__caption {
-  margin: 8px 4px 6px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
-.segmented {
-  display: inline-flex;
-  padding: 4px;
-  border-radius: 999px;
-  background: var(--surface-2);
-}
-
-.segmented button {
-  padding: 8px 18px;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--muted);
-  cursor: pointer;
-}
-
-.segmented button[aria-selected='true'] {
-  background: var(--surface);
-  color: var(--ink);
-  box-shadow: var(--shadow);
-}
-
-.segmented button:last-child[aria-selected='true'] {
-  color: var(--accent);
-}
-
 .detail__text h2 {
   margin-top: 28px;
   font-size: 1.2rem;
@@ -1139,6 +1104,184 @@ main {
   .detail__art {
     position: sticky;
     top: 80px;
+  }
+}
+
+.detail__jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.detail__compare {
+  margin-top: 48px;
+  scroll-margin-top: 80px;
+}
+
+/* ---------- Mistake / correction comparison ---------- */
+.compare-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+@media (min-width: 900px) {
+  .compare-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+.compare {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.compare__heading {
+  margin-bottom: 16px;
+}
+
+.compare__title {
+  margin: 4px 0 14px;
+  font-size: 1.25rem;
+}
+
+.compare__pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 8px;
+}
+
+.compare__side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 36px 8px 12px;
+  border-radius: 18px;
+  border: 2px solid transparent;
+}
+
+.compare__side .figure {
+  height: clamp(180px, 42vw, 280px);
+}
+
+.compare__side--bad {
+  background: var(--surface-2);
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.compare__side--good {
+  background: radial-gradient(100% 80% at 50% 20%, var(--surface) 0%, var(--ok-soft) 100%);
+  border-color: color-mix(in srgb, var(--ok) 45%, transparent);
+}
+
+.compare__side figcaption {
+  margin-top: 8px;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.compare__tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px 3px 7px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.compare__side--bad .compare__tag {
+  background: var(--accent);
+}
+
+.compare__side--good .compare__tag {
+  background: var(--ok);
+}
+
+.compare__arrow {
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
+.compare__text {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 0;
+}
+
+.compare__text dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.compare__text div:first-child dt {
+  color: var(--accent);
+}
+
+.compare__text div:last-child dt {
+  color: var(--ok);
+}
+
+.compare__text dd {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.compare__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 14px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.compare__link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 420px) {
+  .compare {
+    padding: 14px;
+  }
+  .compare__pair {
+    gap: 4px;
+  }
+  .compare__arrow {
+    width: 22px;
+    height: 22px;
   }
 }
 

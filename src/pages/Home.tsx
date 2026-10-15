@@ -1,6 +1,7 @@
+import { CompareCard } from '../components/CompareCard'
 import { Icon } from '../components/Icon'
 import { categoryLabel, Level } from '../components/PoseCard'
-import { POSES, poseOfTheDay } from '../data/poses'
+import { POSE_BY_ID, POSES, poseOfTheDay } from '../data/poses'
 import { PRINCIPLES } from '../data/training'
 import { Figure } from '../figure/Figure'
 import { href } from '../router'
@@ -82,6 +83,23 @@ export function Home() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="section">
+        <div className="section__head">
+          <h2>Avant, après</h2>
+          <p>Les erreurs qui trahissent le malaise, à côté de la pose qui les corrige.</p>
+        </div>
+        <div className="compare-grid">
+          {['espace-bras', 'front-en-avant'].map((id) => (
+            <CompareCard key={id} pose={POSE_BY_ID.get(id)!} linked />
+          ))}
+        </div>
+        <div className="actions section__more">
+          <a className="btn btn--ghost" href={href('erreurs')}>
+            <Icon name="compare" size={18} /> Voir les {POSES.length} erreurs et leurs corrections
+          </a>
+        </div>
       </section>
 
       <section className="section">

@@ -7,6 +7,9 @@ Elle reprend les techniques enseignées aux acteurs, aux mannequins et aux invit
   avec ce qu’il faut éviter, pourquoi ça marche, et une comparaison « à faire / à éviter ».
   On y trouve par exemple le *squinch* et le « front en avant » du portraitiste Peter Hurley,
   le *smize* de Tyra Banks, le contrapposto, la pose tapis rouge…
+- **Les erreurs** : pour chaque pose, l’erreur classique qu’elle corrige (bras collés, épaules
+  qui remontent, tête qui recule, genoux face à l’objectif…), dessinée côte à côte avec la
+  correction. Une page les rassemble toutes, et chaque fiche de pose montre la sienne.
 - **L’entraînement** : échauffement d’acteur (respiration, mâchoire, faux rire), enchaînement de
   poses devant le miroir avec chrono, exercice « bouge à chaque déclic », quiz « l’œil du photographe ».
 - **Le coach (bêta)** : la caméra (ou une photo existante) analyse ta posture et propose des

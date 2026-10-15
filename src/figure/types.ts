@@ -32,14 +32,14 @@ export interface BodySkeleton {
   far?: 'l' | 'r'
   /** Hide a hand (e.g. inside a pocket or behind the back). */
   hideHand?: ('l' | 'r')[]
-  prop?: 'chair' | 'stool' | 'wall-left' | 'wall-right'
+  prop?: 'chair' | 'stool' | 'wall-left' | 'wall-right' | 'wall-back'
 }
 
 /** A close-up portrait used for facial techniques. */
 export interface FaceSkeleton {
   kind: 'face'
   view: 'front' | 'profile'
-  eyes?: 'open' | 'squinch' | 'wide' | 'smize' | 'closed'
+  eyes?: 'open' | 'squinch' | 'wide' | 'smize' | 'closed' | 'down'
   mouth?: 'neutral' | 'soft' | 'smile' | 'tense' | 'laugh'
   /** Profile only: position of the head relative to the neck. */
   chin?: 'forward' | 'neutral' | 'tucked' | 'up'

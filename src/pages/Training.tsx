@@ -44,7 +44,7 @@ export function Training() {
           <span className="drill__icon"><Icon name="eye" /></span>
           <div>
             <h3>L’œil du photographe</h3>
-            <p>Deux silhouettes, une seule est flatteuse. Entraîne ton œil à repérer ce qui marche.</p>
+            <p>Deux silhouettes : l’erreur et sa correction. Saurais-tu dire laquelle est la plus flatteuse ?</p>
           </div>
           <span className="pill">Quiz</span>
         </a>
@@ -370,7 +370,7 @@ export function Variations() {
 export function Quiz() {
   const rounds = useMemo(
     () =>
-      shuffle(POSES.filter((p) => p.mistake)).map((pose) => ({ pose, goodFirst: Math.random() < 0.5 })),
+      shuffle(POSES).slice(0, 10).map((pose) => ({ pose, goodFirst: Math.random() < 0.5 })),
     [],
   )
   const [index, setIndex] = useState(0)
@@ -425,7 +425,7 @@ export function Quiz() {
             aria-label={`Silhouette ${i + 1}`}
           >
             <Figure
-              illustration={o === 'good' ? pose.illustration : pose.mistake!.illustration}
+              illustration={o === 'good' ? pose.illustration : pose.mistake.illustration}
               annotated={false}
               tone={picked && o === 'bad' ? 'mistake' : 'default'}
             />
@@ -437,7 +437,7 @@ export function Quiz() {
         <div className={`quiz__answer ${picked === 'good' ? 'is-good' : 'is-bad'}`}>
           <strong>{picked === 'good' ? 'Bien vu !' : 'Pas tout à fait.'}</strong>
           <p>
-            <b>{pose.name}</b> : {pose.summary} {pose.mistake!.caption}
+            L’erreur : <b>{pose.mistake.title.toLowerCase()}</b>. {pose.mistake.caption} La correction, <b>{pose.name.toLowerCase()}</b> : {pose.summary}
           </p>
           <div className="actions">
             <a className="btn btn--ghost" href={href('poses', pose.id)}>

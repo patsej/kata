@@ -26,7 +26,8 @@ export interface Pose {
   tip?: string
   origin?: string
   illustration: Illustration
-  mistake?: { illustration: Illustration; caption: string }
+  /** The classic error this pose corrects, drawn to compare side by side. */
+  mistake: { title: string; illustration: Illustration; caption: string }
   coach?: CoachSpec
 }
 
@@ -164,6 +165,7 @@ export const POSES: Pose[] = [
       ],
     },
     mistake: {
+      title: 'Rester « carré » face à l’objectif',
       illustration: { skeleton: NEUTRAL },
       caption: 'Épaules carrées face à l’objectif : la silhouette paraît plus large et figée.',
     },
@@ -213,6 +215,7 @@ export const POSES: Pose[] = [
       arrows: [{ from: [140, 182], to: [124, 262], bend: 8 }],
     },
     mistake: {
+      title: 'Le poids sur les deux jambes',
       illustration: {
         skeleton: { ...NEUTRAL, lk: [92, 208], rk: [108, 208], la: [94, 264], ra: [106, 264], lf: [90, 276], rf: [110, 276] },
       },
@@ -254,6 +257,7 @@ export const POSES: Pose[] = [
       ],
     },
     mistake: {
+      title: 'Les bras collés au corps',
       illustration: { skeleton: { ...NEUTRAL, le: [80, 112], re: [120, 112], lw: [84, 150], rw: [116, 150] } },
       caption: 'Bras plaqués contre le corps : ils s’écrasent et élargissent la silhouette.',
     },
@@ -288,6 +292,7 @@ export const POSES: Pose[] = [
       ],
     },
     mistake: {
+      title: 'Les épaules qui remontent',
       illustration: {
         skeleton: {
           ...NEUTRAL,
@@ -357,6 +362,7 @@ export const POSES: Pose[] = [
       arrows: [{ from: [80, 140], to: [80, 128] }],
     },
     mistake: {
+      title: 'Le regard écarquillé',
       illustration: { skeleton: { kind: 'face', view: 'front', eyes: 'wide', mouth: 'neutral' } },
       caption: 'Yeux écarquillés : le regard paraît surpris, voire inquiet.',
     },
@@ -408,6 +414,7 @@ export const POSES: Pose[] = [
       ],
     },
     mistake: {
+      title: 'La tête qui recule',
       illustration: { skeleton: { kind: 'face', view: 'profile', chin: 'tucked' } },
       caption: 'Tête reculée : la mâchoire se noie dans le cou, le double menton apparaît.',
     },
@@ -451,6 +458,7 @@ export const POSES: Pose[] = [
       ],
     },
     mistake: {
+      title: 'Le sourire sans les yeux',
       illustration: { skeleton: { kind: 'face', view: 'front', eyes: 'open', mouth: 'smile' } },
       caption: 'Sourire de la bouche seule : les yeux restent « éteints », l’expression paraît forcée.',
     },
@@ -495,6 +503,7 @@ export const POSES: Pose[] = [
       markers: [{ n: 3, at: [150, 168] }],
     },
     mistake: {
+      title: 'Le sourire forcé',
       illustration: { skeleton: { kind: 'face', view: 'front', eyes: 'wide', mouth: 'smile' } },
       caption: 'Sourire forcé : grande bouche, yeux écarquillés.',
     },
@@ -526,6 +535,11 @@ export const POSES: Pose[] = [
       skeleton: { kind: 'face', view: 'front', eyes: 'open', mouth: 'soft', gaze: 1, tilt: 3, shoulders: 'angled' },
       arrows: [{ from: [140, 80], to: [190, 64], bend: -6 }],
       markers: [{ n: 2, at: [182, 92] }],
+    },
+    mistake: {
+      title: 'Le regard vers le sol',
+      illustration: { skeleton: { kind: 'face', view: 'front', eyes: 'down', mouth: 'neutral', tilt: -2, shoulders: 'angled' } },
+      caption: 'Regard baissé : les paupières tombent, le visage s’assombrit et paraît triste.',
     },
     coach: {
       mode: 'face',
@@ -589,6 +603,7 @@ export const POSES: Pose[] = [
       ],
     },
     mistake: {
+      title: 'La pose « photo de classe »',
       illustration: { skeleton: NEUTRAL },
       caption: 'Face à l’objectif, bras le long du corps : la pose « photo de classe ».',
     },
@@ -640,6 +655,22 @@ export const POSES: Pose[] = [
         { n: 2, at: [80, 152] },
         { n: 3, at: [130, 232] },
       ],
+    },
+    mistake: {
+      title: 'Les mains enfoncées dans les poches',
+      illustration: {
+        skeleton: {
+          ...NEUTRAL,
+          ls: [78, 65],
+          rs: [122, 65],
+          le: [74, 106],
+          re: [126, 106],
+          lw: [86, 146],
+          rw: [114, 146],
+          hideHand: ['l', 'r'],
+        },
+      },
+      caption: 'Les deux mains enfoncées jusqu’aux poignets : les épaules remontent, l’attitude se ferme.',
     },
     coach: {
       mode: 'body',
@@ -697,6 +728,23 @@ export const POSES: Pose[] = [
         { n: 2, at: [140, 62] },
         { n: 3, at: [122, 28] },
       ],
+    },
+    mistake: {
+      title: 'Les bras croisés serrés',
+      illustration: {
+        skeleton: {
+          ...NEUTRAL,
+          head: [100, 42],
+          neck: [100, 61],
+          ls: [79, 66],
+          rs: [121, 66],
+          le: [86, 104],
+          re: [114, 104],
+          lw: [118, 86],
+          rw: [82, 88],
+        },
+      },
+      caption: 'Bras serrés haut sur la poitrine, épaules remontées : on lit la défense, pas l’assurance.',
     },
     coach: {
       mode: 'body',
@@ -756,6 +804,11 @@ export const POSES: Pose[] = [
         { n: 2, at: [152, 260] },
         { n: 3, at: [130, 232] },
       ],
+    },
+    mistake: {
+      title: 'Le dos plaqué au mur',
+      illustration: { skeleton: { ...NEUTRAL, prop: 'wall-back' } },
+      caption: 'Tout le dos contre le mur, pieds collés : le corps est raide, comme sur une photo d’identité.',
     },
     coach: {
       mode: 'body',
@@ -817,6 +870,34 @@ export const POSES: Pose[] = [
         { n: 3, at: [146, 130] },
       ],
     },
+    mistake: {
+      title: 'La marche pressée, regard au sol',
+      illustration: {
+        skeleton: {
+          kind: 'body',
+          head: [104, 46],
+          headTilt: 14,
+          facing: 'right',
+          neck: [101, 63],
+          ls: [84, 73],
+          rs: [117, 72],
+          le: [82, 114],
+          lw: [84, 152],
+          re: [120, 113],
+          rw: [120, 151],
+          lh: [92, 152],
+          rh: [110, 150],
+          lk: [74, 206],
+          la: [58, 258],
+          lf: [48, 266],
+          rk: [124, 206],
+          ra: [144, 254],
+          rf: [150, 268],
+          far: 'r',
+        },
+      },
+      caption: 'Grands pas raides, bras figés, tête baissée : la photo est floue et la démarche paraît lourde.',
+    },
     coach: {
       mode: 'body',
       framing: 'full',
@@ -868,6 +949,33 @@ export const POSES: Pose[] = [
         { n: 3, at: [62, 72] },
       ],
     },
+    mistake: {
+      title: 'L’épaule remontée vers le menton',
+      illustration: {
+        skeleton: {
+          kind: 'body',
+          head: [98, 44],
+          headTilt: -10,
+          facing: 'left',
+          neck: [100, 62],
+          ls: [82, 62],
+          rs: [120, 70],
+          le: [76, 104],
+          lw: [78, 142],
+          re: [124, 111],
+          rw: [122, 149],
+          lh: [89, 152],
+          rh: [112, 151],
+          lk: [92, 208],
+          rk: [110, 207],
+          la: [93, 264],
+          ra: [109, 263],
+          lf: [96, 276],
+          rf: [104, 276],
+        },
+      },
+      caption: 'Épaule levée pour rejoindre le menton : le cou disparaît et la pose paraît crispée.',
+    },
     coach: {
       mode: 'body',
       framing: 'upper',
@@ -915,6 +1023,7 @@ export const POSES: Pose[] = [
       arrows: [{ from: [140, 74], to: [160, 86] }],
     },
     mistake: {
+      title: 'S’enfoncer dans la chaise',
       illustration: {
         skeleton: {
           ...SEATED_SIDE,
@@ -998,6 +1107,32 @@ export const POSES: Pose[] = [
         { n: 1, at: [140, 110] },
       ],
     },
+    mistake: {
+      title: 'Les genoux face à l’objectif',
+      illustration: {
+        skeleton: {
+          kind: 'body',
+          prop: 'stool',
+          head: [100, 94],
+          neck: [100, 114],
+          ls: [78, 126],
+          rs: [122, 126],
+          le: [74, 166],
+          lw: [76, 204],
+          re: [126, 166],
+          rw: [124, 204],
+          lh: [88, 200],
+          rh: [112, 200],
+          lk: [74, 212],
+          rk: [126, 212],
+          la: [72, 270],
+          ra: [128, 270],
+          lf: [66, 278],
+          rf: [134, 278],
+        },
+      },
+      caption: 'Genoux pointés vers l’objectif, jambes écartées : les genoux paraissent énormes et la pose, massive.',
+    },
     coach: {
       mode: 'body',
       framing: 'full',
@@ -1044,6 +1179,32 @@ export const POSES: Pose[] = [
         { n: 3, at: [100, 160] },
         { n: 1, at: [148, 270] },
       ],
+    },
+    mistake: {
+      title: 'Le dos qui s’effondre',
+      illustration: {
+        skeleton: {
+          kind: 'body',
+          prop: 'stool',
+          head: [100, 140],
+          neck: [100, 152],
+          ls: [77, 160],
+          rs: [123, 160],
+          le: [82, 206],
+          re: [118, 206],
+          lw: [95, 240],
+          rw: [105, 240],
+          lh: [88, 202],
+          rh: [112, 202],
+          lk: [76, 214],
+          rk: [124, 214],
+          la: [74, 272],
+          ra: [126, 272],
+          lf: [68, 280],
+          rf: [132, 280],
+        },
+      },
+      caption: 'Dos arrondi, tête rentrée, mains qui pendent : la pose s’affaisse au lieu de s’engager.',
     },
     coach: {
       mode: 'body',
@@ -1092,6 +1253,13 @@ export const POSES: Pose[] = [
         { n: 2, at: [72, 150] },
       ],
     },
+    mistake: {
+      title: 'Les mains « mur de foot »',
+      illustration: {
+        skeleton: { ...NEUTRAL, le: [82, 112], re: [118, 112], lw: [96, 146], rw: [104, 146] },
+      },
+      caption: 'Mains jointes devant soi, bras tendus : la position du mur des footballeurs, figée et fermée.',
+    },
     coach: {
       mode: 'body',
       framing: 'upper',
@@ -1133,6 +1301,13 @@ export const POSES: Pose[] = [
         { n: 2, at: [70, 46] },
         { n: 3, at: [118, 64] },
       ],
+    },
+    mistake: {
+      title: 'Le menton sur le poing',
+      illustration: {
+        skeleton: { ...THREE_QUARTER, headTilt: 0, head: [98, 40], le: [90, 104], lw: [96, 66] },
+      },
+      caption: 'Le menton appuyé sur le poing : la joue se déforme et on dirait « Le Penseur » qui s’ennuie.',
     },
     coach: {
       mode: 'body',
