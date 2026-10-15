@@ -1,8 +1,7 @@
-*~
-.classpath
-.idea/
-.project
-.settings
-out/
-target/
-*.iml
+node_modules/
+dist/
+public/mediapipe/
+*.log
+.DS_Store
+.vite/
+*.tsbuildinfo

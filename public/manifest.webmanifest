@@ -1,0 +1,14 @@
+{
+  "name": "Posé · apprendre à poser",
+  "short_name": "Posé",
+  "description": "Les poses des acteurs et des mannequins, un entraînement guidé et un coach caméra.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f1ea",
+  "theme_color": "#c8553d",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
