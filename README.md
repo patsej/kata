@@ -32,6 +32,17 @@ utilise la version déployée (voir ci-dessous) ou `npm run dev -- --host` avec 
 
 ## Déploiement
 
+### Vercel
+
+Le dépôt contient un `vercel.json` prêt à l’emploi. Sur [vercel.com/new](https://vercel.com/new),
+importe le dépôt GitHub : Vercel détecte Vite, lance `npm run build` et publie `dist/`.
+Chaque push sur la branche de production (`master` par défaut) redéploie l’application,
+et chaque autre branche obtient une URL d’aperçu.
+
+En ligne de commande : `npx vercel` (aperçu) puis `npx vercel --prod`.
+
+### GitHub Pages
+
 Le workflow `.github/workflows/deploy.yml` publie l’application sur GitHub Pages à chaque push sur
 `master`. Il faut activer une fois **Settings → Pages → Source : GitHub Actions** dans le dépôt.
 Sur téléphone, « Ajouter à l’écran d’accueil » l’installe comme une application.
